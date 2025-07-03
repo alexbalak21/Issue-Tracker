@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import {usePathname} from "next/navigation"
 import React from "react"
 import {FaWrench} from "react-icons/fa"
 import {FiMoon, FiSun} from "react-icons/fi"
@@ -20,6 +21,12 @@ function Navbar() {
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev)
   }
+  const currentPath = usePathname()
+
+  const links = [
+    {name: "Dashboard", href: "/"},
+    {name: "Issues", href: "/issues"},
+  ]
 
   return (
     <nav className="flex items-center justify-between p-4 border-b border-gray-300">
@@ -28,16 +35,17 @@ function Navbar() {
           <FaWrench />
         </Link>
         <ul className="flex space-x-6">
-          <li>
-            <Link href="/" className="hover:underline">
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link href="/issues" className="hover:underline">
-              Issues
-            </Link>
-          </li>
+          {links.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={`${
+                  currentPath === link.href ? "font-bold text-zinc-800" : ""
+                } text-zinc-500 hover:text-zinc-800 hover:font-bold dark:text-zinc-100 dark:hover:text-zinc-300  transition-colors`}>
+                {link.name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
       <button
