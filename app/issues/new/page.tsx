@@ -26,6 +26,18 @@ function NewIssuePage() {
     handleSubmit,
     formState: {errors},
   } = useForm<IssueForm>({resolver: zodResolver(createIssueSchema)})
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsSubmitting(true)
+      await axios.post("/api/issues", data)
+      router.push("/issues")
+    } catch (error) {
+      setError("An unexpected error occurred.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  })
   return (
     <div className="max-w-2xl mx-auto">
       {error && (
@@ -33,22 +45,10 @@ function NewIssuePage() {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form
-        className="mt-16"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setIsSubmitting(true)
-            await axios.post("/api/issues", data)
-            router.push("/issues")
-          } catch (error) {
-            setError("An unexpected error occurred.")
-          } finally {
-            setIsSubmitting(false)
-          }
-        })}>
+      <form className="mt-16" onSubmit={onSubmit}>
         <Label htmlFor="title">Title</Label>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <TextField.Root className="mb-4 border border-green-500" id="title" placeholder="Title" {...register("title")} />
+        <TextField.Root className="mb-4 border dark:border-green-500" id="title" placeholder="Title" {...register("title")} />
 
         <Label htmlFor="description">Description</Label>
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
