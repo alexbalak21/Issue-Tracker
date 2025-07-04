@@ -1,0 +1,11 @@
+### POST ISSUE
+POST http://localhost:3000/api/issues
+content-type: application/json
+
+{
+    "title": "First Issue",
+    "description": "Description of the first issue"
+}
+
+###GET
+GET http://localhost:3000/
