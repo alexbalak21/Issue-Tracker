@@ -1,0 +1,11 @@
+.radix-themes {
+  --default-font-family: var(--font-inter);
+}
+
+.radix-themes[data-theme="dark"] {
+  --default-font-family: var(--font-inter);
+}
+
+.radix-themes[data-theme="light"] {
+  --default-font-family: var(--font-inter);
+}
