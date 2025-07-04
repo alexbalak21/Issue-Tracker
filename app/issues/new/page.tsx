@@ -10,6 +10,7 @@ import {useRouter} from "next/navigation"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {createIssueSchema} from "@/app/schemas/validationSchemas"
 import {z} from "zod"
+import ErrorMessage from "@/app/components/ErrorMessage"
 
 type IssueForm = z.infer<typeof createIssueSchema>
 
@@ -29,11 +30,11 @@ function NewIssuePage() {
         router.push("/issues")
       })}>
       <Label htmlFor="title">Title</Label>
-      {errors.title && <p className="text-red-500">{errors.title.message}</p>}
-      <TextField.Root className="mb-4" id="title" placeholder="Title" {...register("title")} />
+      <ErrorMessage>{errors.title?.message}</ErrorMessage>
+      <TextField.Root className="mb-4 border border-green-500" id="title" placeholder="Title" {...register("title")} />
 
       <Label htmlFor="description">Description</Label>
-      {errors.description && <p className="text-red-500">{errors.description.message}</p>}
+      <ErrorMessage>{errors.description?.message}</ErrorMessage>
       <Controller
         name="description"
         control={control}
