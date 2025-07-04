@@ -11,6 +11,21 @@
 .dark {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 0, 0, 0;
+  --foreground: #d1d5dc;
+
+  ::placeholder {
+    color: var(--foreground);
+    opacity: 0.8;
+  }
+  .EasyMDEContainer .CodeMirror {
+    background-color: #111113;
+    color: var(--foreground);
+    opacity: 0.8;
+  }
+  .CodeMirror .CodeMirror-placeholder {
+    color: var(--foreground);
+    opacity: 0.8;
+  }
 }
 
 body {

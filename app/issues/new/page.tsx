@@ -48,14 +48,13 @@ function NewIssuePage() {
       <form className="mt-16" onSubmit={onSubmit}>
         <Label htmlFor="title">Title</Label>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <TextField.Root className="mb-4 border dark:border-green-500" id="title" placeholder="Title" {...register("title")} />
-
+        <TextField.Root className="mb-4 border border-gray-100 dark:border-gray-100" id="title" placeholder="Title" {...register("title")} />
         <Label htmlFor="description">Description</Label>
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Controller
           name="description"
           control={control}
-          render={({field}) => <SimpleMDE placeholder="Description" id="description" className="mb-4" {...field} />}
+          render={({field}) => <SimpleMDE placeholder="Description" id="description" className="mb-4 " {...field} />}
         />
         <Button disabled={isSubmitting}>Submit New issue {isSubmitting && <LoadingSpinner />}</Button>
       </form>

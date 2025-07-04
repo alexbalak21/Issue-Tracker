@@ -1,11 +1,34 @@
-import React from "react"
+import prisma from "@/prisma/client"
+import {Table} from "@radix-ui/themes"
 
-function page() {
+async function IssuesPage() {
+  const issues = await prisma.issue.findMany()
+
   return (
-    <div>
-      <h1 className="text-3xl">Issues</h1>
+    <div className="max-w-5xl mx-auto px-1.5">
+      <Table.Root className="mt-16" variant="surface">
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">Status</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">Created At</Table.ColumnHeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {issues.map((issue) => (
+            <Table.Row key={issue.id}>
+              <Table.RowHeaderCell>
+                {issue.title}
+                <div className="block md:hidden">{issue.status}</div>
+              </Table.RowHeaderCell>
+              <Table.Cell className="hidden md:table-cell">{issue.status}</Table.Cell>
+              <Table.Cell className="hidden md:table-cell">{issue.createdAt.toDateString()}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
     </div>
   )
 }
 
-export default page
+export default IssuesPage
