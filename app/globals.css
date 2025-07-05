@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-=======
-@import "tailwindcss/preflight"; /* base reset */
-@import "tailwindcss"; /* components & utilities */
->>>>>>> 8ac57127afb65454592882c0ffce7afd465ba93c
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* 🌞 Light Theme (Default) */
