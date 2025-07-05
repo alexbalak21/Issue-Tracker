@@ -1,4 +1,10 @@
 module.exports = {
-  content: ["./app/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        alexblue: "#0077ff",
+      },
+    },
+  },
   plugins: [require("@tailwindcss/typography")],
 }

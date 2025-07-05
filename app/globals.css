@@ -1,14 +1,19 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+=======
+@import "tailwindcss/preflight"; /* base reset */
+@import "tailwindcss"; /* components & utilities */
+>>>>>>> 8ac57127afb65454592882c0ffce7afd465ba93c
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Light Theme (Default) */
+/* 🌞 Light Theme (Default) */
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
 }
 
-/* Dark Theme */
+/* 🌙 Dark Theme */
 .dark {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 0, 0, 0;
@@ -18,21 +23,24 @@
     color: var(--foreground);
     opacity: 0.8;
   }
+
   .EasyMDEContainer .CodeMirror {
     background-color: #111113;
     color: var(--foreground);
     opacity: 0.8;
   }
+
   .CodeMirror .CodeMirror-placeholder {
     color: var(--foreground);
     opacity: 0.8;
   }
+
   .CodeMirror-focused .CodeMirror-lines {
     color: white !important;
-    opacity: 1 !important;
   }
 }
 
+/* 💻 Global Body Styles */
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
