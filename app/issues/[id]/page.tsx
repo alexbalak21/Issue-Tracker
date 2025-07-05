@@ -22,9 +22,11 @@ async function IssueDetailsPage({params}: Props) {
         <IssueStatusBadge status={issue.status} />
         <Text className="pe-1">{issue.createdAt.toDateString()}</Text>
       </div>
-      <div className="prose">
-        <ReactMarkdown>{issue.description}</ReactMarkdown>
-      </div>
+      <Card className="mt-5">
+        <div className="prose">
+          <ReactMarkdown>{issue.description}</ReactMarkdown>
+        </div>
+      </Card>
     </div>
   )
 }
