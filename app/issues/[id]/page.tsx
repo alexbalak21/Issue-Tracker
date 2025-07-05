@@ -7,7 +7,7 @@ interface Props {
 
 async function IssueDetailsPage({params}: Props) {
   const {id} = await params
-  if (typeof id !== "number") notFound()
+  if (isNaN(parseInt(id))) notFound()
   const issue = await prisma.issue.findUnique({where: {id: parseInt(id)}})
 
   if (!issue) notFound()

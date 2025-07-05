@@ -3,10 +3,8 @@ import Link from "next/link"
 
 function Home() {
   return (
-    <div className="mt-5 mx-5">
-      <Button>
-        <Link href="/issues/new">New Issue</Link>
-      </Button>
+    <div className="max-w-5xl mx-auto px-1.5">
+      <h1 className="text-3xl mt-5">Home</h1>
     </div>
   )
 }
