@@ -1,18 +1,27 @@
 "use client"
 
-import {Button, Callout, TextField} from "@radix-ui/themes"
-import {Label} from "@radix-ui/react-label"
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
-import {useForm, Controller} from "react-hook-form"
-import axios from "axios"
-import {useRouter} from "next/navigation"
-import {zodResolver} from "@hookform/resolvers/zod"
-import {createIssueSchema} from "@/app/schemas/validationSchemas"
-import {z} from "zod"
 import ErrorMessage from "@/app/components/ErrorMessage"
 import LoadingSpinner from "@/app/components/LoadingSpinner"
+import {createIssueSchema} from "@/app/schemas/validationSchemas"
+import {zodResolver} from "@hookform/resolvers/zod"
+import {Label} from "@radix-ui/react-label"
+import {Button, Callout, TextField} from "@radix-ui/themes"
+import axios from "axios"
+import "easymde/dist/easymde.min.css"
+import dynamic from "next/dynamic"
+import {useRouter} from "next/navigation"
 import {useState} from "react"
+import {Controller, useForm} from "react-hook-form"
+import {z} from "zod"
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center items-center h-105">
+      <LoadingSpinner />
+    </div>
+  ),
+})
 
 type IssueForm = z.infer<typeof createIssueSchema>
 
@@ -50,11 +59,13 @@ function NewIssuePage() {
         <TextField.Root className="mb-4 border border-gray-100 dark:border-gray-100" id="title" placeholder="Title" {...register("title")} />
         <Label htmlFor="description">Description</Label>
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
+
         <Controller
           name="description"
           control={control}
           render={({field}) => <SimpleMDE placeholder="Description" id="description" className="mb-4 " {...field} />}
         />
+
         <Button disabled={isSubmitting}>Submit New issue {isSubmitting && <LoadingSpinner />}</Button>
       </form>
     </div>
