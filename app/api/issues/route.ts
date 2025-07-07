@@ -1,10 +1,10 @@
 import {NextRequest, NextResponse} from "next/server"
 import prisma from "@/prisma/client"
-import {createIssueSchema} from "@/app/schemas/validationSchemas"
+import {issueSchema} from "@/app/schemas/validationSchemas"
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const validation = createIssueSchema.safeParse(body)
+  const validation = issueSchema.safeParse(body)
   if (!validation.success) {
     return NextResponse.json(validation.error.format(), {status: 400})
   }
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 //PUT method
 export async function PUT(request: NextRequest) {
   const body = await request.json()
-  const validation = createIssueSchema.safeParse(body)
+  const validation = issueSchema.safeParse(body)
   if (!validation.success) {
     return NextResponse.json(validation.error.format(), {status: 400})
   }
