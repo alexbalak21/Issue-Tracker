@@ -4,7 +4,7 @@ import {BsPencilSquare} from "react-icons/bs"
 
 function EditIssueButton({issueId}: {issueId: number}) {
   return (
-    <Button variant="surface" size="3" className="me-2">
+    <Button variant="surface" size="3" color="indigo" className="me-2">
       <BsPencilSquare />
       <Link href={`/issues/${issueId}/edit`}> Edit Issue</Link>
     </Button>

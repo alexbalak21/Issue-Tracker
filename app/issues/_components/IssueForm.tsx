@@ -13,6 +13,7 @@ import dynamic from "next/dynamic"
 import {useRouter} from "next/navigation"
 import {useState} from "react"
 import {Controller, useForm} from "react-hook-form"
+import {FaSave} from "react-icons/fa"
 import {z} from "zod"
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
@@ -48,18 +49,20 @@ function IssueForm({issue}: {issue?: Issue}) {
     }
   })
   return (
-    <div className="max-w-2xl mx-auto">
+    <>
+      {" "}
       {error && (
         <Callout.Root color="red" className="mb-4">
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form className="mt-16" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <Label htmlFor="title">Title</Label>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <TextField.Root
           defaultValue={issue?.title}
           className="mb-4 border border-gray-100 dark:border-gray-100"
+          style={{fontSize: "1.4rem"}}
           id="title"
           placeholder="Title"
           {...register("title")}
@@ -74,9 +77,11 @@ function IssueForm({issue}: {issue?: Issue}) {
           render={({field}) => <SimpleMDE placeholder="Description" id="description" className="mb-4 " {...field} />}
         />
 
-        <Button disabled={isSubmitting}>Submit New issue {isSubmitting && <LoadingSpinner />}</Button>
+        <Button size="3" disabled={isSubmitting}>
+          Submit New issue <FaSave /> {isSubmitting && <LoadingSpinner />}
+        </Button>
       </form>
-    </div>
+    </>
   )
 }
 

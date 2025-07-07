@@ -15,7 +15,11 @@ async function EditIssuePage({params}: Props) {
   })
   if (!issue) notFound()
 
-  return <IssueForm issue={issue} />
+  return (
+    <div className="max-w-5xl mx-auto px-1.5 mt-5">
+      <IssueForm issue={issue} />
+    </div>
+  )
 }
 
 export default EditIssuePage

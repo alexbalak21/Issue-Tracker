@@ -15,9 +15,9 @@ async function IssueDetailsPage({params}: Props) {
   if (!issue) notFound()
 
   return (
-    <div className="max-w-5xl mx-auto px-1.5 mt-5">
+    <div className="max-w-5xl mx-auto px-1.5 mt-5 mt-12">
       <IssueDetails issue={issue} />
-      <div className="mt-4">
+      <div className="mt-15">
         <EditIssueButton issueId={issue.id} />
       </div>
     </div>
