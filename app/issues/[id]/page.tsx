@@ -1,7 +1,9 @@
 import IssueStatusBadge from "@/app/components/IssueStatusBadge"
 import prisma from "@/prisma/client"
-import {Card, Heading, Text} from "@radix-ui/themes"
+import {Button, Card, Heading, Text} from "@radix-ui/themes"
+import Link from "next/link"
 import {notFound} from "next/navigation"
+import {BsPencilSquare} from "react-icons/bs"
 import ReactMarkdown from "react-markdown"
 
 interface Props {
@@ -21,7 +23,7 @@ async function IssueDetailsPage({params}: Props) {
     <div className="max-w-5xl mx-auto px-1.5 mt-5">
       <Heading>{issue.title}</Heading>
       <div className="flex justify-between ps-1 mt-3">
-        <IssueStatusBadge status={issue.status} />
+        <IssueStatusBadge status={issue.status} size="3" />
         <Text className="pe-1">{issue.createdAt.toDateString()}</Text>
       </div>
       <Card className="mt-4 min-h-100">
@@ -29,6 +31,12 @@ async function IssueDetailsPage({params}: Props) {
           <ReactMarkdown>{issue.description}</ReactMarkdown>
         </div>
       </Card>
+      <div className="mt-4">
+        <Button variant="surface" size="3" className="me-2">
+          <BsPencilSquare />
+          <Link href={`/issues/${issue.id}/edit`}> Edit Issue</Link>
+        </Button>
+      </div>
     </div>
   )
 }
