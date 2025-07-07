@@ -15,14 +15,16 @@ async function IssueDetailsPage({params}: Props) {
 
   if (!issue) notFound()
 
+  // await delay(1000)
+
   return (
     <div className="max-w-5xl mx-auto px-1.5 mt-5">
       <Heading>{issue.title}</Heading>
-      <div className="flex justify-between ps-1">
+      <div className="flex justify-between ps-1 mt-3">
         <IssueStatusBadge status={issue.status} />
         <Text className="pe-1">{issue.createdAt.toDateString()}</Text>
       </div>
-      <Card className="mt-5">
+      <Card className="mt-4 min-h-100">
         <div className="prose">
           <ReactMarkdown>{issue.description}</ReactMarkdown>
         </div>
