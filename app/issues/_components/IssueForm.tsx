@@ -40,7 +40,8 @@ function IssueForm({issue}: {issue?: Issue}) {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true)
-      await axios.post("/api/issues", data)
+      if (issue) await axios.patch(`/api/issues/${issue.id}`, data)
+      else await axios.post("/api/issues", data)
       router.push("/issues")
     } catch (error) {
       setError("An unexpected error occurred.")
@@ -76,28 +77,9 @@ function IssueForm({issue}: {issue?: Issue}) {
           control={control}
           render={({field}) => <SimpleMDE placeholder="Description" id="description" className="mb-4 " {...field} />}
         />
-        {issue && (
-          <Button
-            size="3"
-            color="indigo"
-            className="mb-4"
-            onClick={async () => {
-              try {
-                setIsSubmitting(true)
-                await axios.put("/api/issues", {...issue, ...field.value})
-                router.push(`/issues/${issue.id}`)
-              } catch (error) {
-                setError("An unexpected error occurred.")
-              } finally {
-                setIsSubmitting(false)
-              }
-            }}>
-            Update Issue <FaSave /> {isSubmitting && <LoadingSpinner />}
-          </Button>
-        )}
 
-        <Button size="3" disabled={isSubmitting}>
-          Submit New issue <FaSave /> {isSubmitting && <LoadingSpinner />}
+        <Button size="3" color={issue ? "indigo" : "green"} disabled={isSubmitting}>
+          {issue ? "Update Issue" : "Create Issue"} <FaSave /> {isSubmitting && <LoadingSpinner />}
         </Button>
       </form>
     </>
