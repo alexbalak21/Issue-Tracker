@@ -11,8 +11,8 @@ function IssueDetails({issue}: {issue: Issue}) {
         <IssueStatusBadge status={issue.status} size="3" />
         <Text className="pe-1">{issue.createdAt.toDateString()}</Text>
       </div>
-      <Card className="mt-4 min-h-100">
-        <div className="prose">
+      <Card className="mt-4 min-h-100 dark:bg-gray-950 dark:border dark:border-gray-600">
+        <div className="prose dark:prose-invert">
           <ReactMarkdown>{issue.description}</ReactMarkdown>
         </div>
       </Card>
