@@ -1,5 +1,6 @@
 "use client"
 
+import LoadingSpinner from "@/app/components/LoadingSpinner"
 import {AlertDialog, Button} from "@radix-ui/themes"
 import axios from "axios"
 import {useRouter} from "next/navigation"
@@ -10,12 +11,15 @@ import {RiDeleteBin6Line} from "react-icons/ri"
 function DeleteIssueButton({issueId}: {issueId: number}) {
   const router = useRouter()
   const [error, setError] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
     try {
+      setIsDeleting(true)
       await axios.delete(`/api/issues/${issueId}`)
       router.push("/issues")
     } catch (error) {
+      setIsDeleting(false)
       setError(true)
     }
   }
@@ -24,8 +28,9 @@ function DeleteIssueButton({issueId}: {issueId: number}) {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red" size="3">
+          <Button disabled={isDeleting} color="red" size="3">
             <RiDeleteBin6Line /> Delete Issue
+            {isDeleting && <LoadingSpinner />}
           </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
