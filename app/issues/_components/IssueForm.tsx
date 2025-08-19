@@ -2,7 +2,7 @@
 
 import ErrorMessage from "@/app/components/ErrorMessage"
 import LoadingSpinner from "@/app/components/LoadingSpinner"
-import {Issue} from "@/app/generated/prisma"
+import {Issue} from "@prisma-generated/client"
 import {issueSchema} from "@/app/schemas/validationSchemas"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {Label} from "@radix-ui/react-label"

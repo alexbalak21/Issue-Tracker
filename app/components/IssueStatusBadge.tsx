@@ -1,5 +1,5 @@
 import React from "react"
-import {Status} from "../generated/prisma"
+import {Status} from "@prisma-generated/client"
 import {Badge} from "@radix-ui/themes"
 
 const statusMap: Record<Status, {label: string; color: "red" | "orange" | "yellow" | "sky" | "mint" | "purple"}> = {
